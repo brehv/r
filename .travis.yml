@@ -1,0 +1,16 @@
+sudo: false
+
+language: go
+
+go:
+  - 1.x
+  - master
+
+install:
+  - go get golang.org/x/lint/golint
+  - export PATH=$GOPATH/bin:$PATH
+  - go install ./...
+
+script:
+  - verify/all.sh -v
+  - go test ./...
