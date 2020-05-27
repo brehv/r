@@ -32,16 +32,16 @@ type Parents struct {
 
 func main() {
 	p := Person{
-		Name:   "Millhouse",
+		Name:   "Milhouse",
 		Parents: Parents{
 			Mom: "Cherry",
 			Dad: "Dennis",
 		},
 	}
 
-	fmt.Println(p) //{Millhouse {Cherry Dennis}}
+	fmt.Println(p) //{Milhouse {Cherry Dennis}}
 	updated := R(p, "Parents.Dad", "Larry")
-	fmt.Println(updated) //{Millhouse {Cherry Larry}}
+	fmt.Println(updated) //{Milhouse {Cherry Larry}}
 }
 
 ```
