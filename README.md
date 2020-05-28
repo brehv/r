@@ -20,25 +20,28 @@ Run tests by running:
 
 ## Usage
 ```go
+package main
+import (
+	"fmt"
+	"github.com/brehv/r"
+)
+var R = r.R
 type Person struct {
-	Name string
+	Name    string
 	Parents Parents
 }
-
 type Parents struct {
 	Mom string
 	Dad string
 }
-
 func main() {
 	p := Person{
-		Name:   "Milhouse",
+		Name: "Milhouse",
 		Parents: Parents{
 			Mom: "Cherry",
 			Dad: "Dennis",
 		},
 	}
-
 	fmt.Println(p) //{Milhouse {Cherry Dennis}}
 	updated := R(p, "Parents.Dad", "Larry")
 	fmt.Println(updated) //{Milhouse {Cherry Larry}}
