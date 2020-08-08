@@ -2,6 +2,7 @@ package r
 
 import (
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -15,12 +16,16 @@ func F(subj interface{}, fName string) interface{} {
 	}
 
 	s := strings.Split(fName, ".")
-
+	if len(s) == 0 {
+		return nil
+	}
 	switch reflect.TypeOf(subj).Kind() {
 	case reflect.Struct, reflect.Ptr:
 		return fStruct(subj, s)
 	case reflect.Map:
 		return fMap(subj, s)
+	case reflect.Slice, reflect.Array:
+		return fSlice(subj, s)
 	default:
 		return nil
 	}
@@ -80,6 +85,36 @@ func fMap(subj interface{}, s []string) interface{} {
 	} else {
 		key := reflect.ValueOf(s[0])
 		next := current.MapIndex(key)
+		updated := F(next.Interface(), strings.Join(s[1:], "."))
+		if updated == nil {
+			return nil
+		}
+		if next.IsValid() {
+			return reflect.ValueOf(updated).Interface()
+		}
+	}
+	return nil
+}
+
+func fSlice(subj interface{}, s []string) interface{} {
+	if isNil(subj) {
+		return nil
+	}
+	index, err := strconv.Atoi(s[0])
+	if err != nil {
+		return nil
+	}
+	current := reflect.ValueOf(subj)
+	if index > current.Len() {
+		return nil
+	}
+	if len(s) == 1 {
+		field := current.Index(index)
+		if field.IsValid() {
+			return field.Interface()
+		}
+	} else {
+		next := current.Index(index)
 		updated := F(next.Interface(), strings.Join(s[1:], "."))
 		if updated == nil {
 			return nil

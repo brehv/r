@@ -120,6 +120,14 @@ func TestF(t *testing.T) {
 			},
 			want: []string{"one", "two"},
 		},
+		{
+			name: "Slice Get Value",
+			args: args{
+				subj:  Person{Name: "Milhouse", Slice: []string{"one", "two"}},
+				fName: "Slice.1",
+			},
+			want: "two",
+		},
 	}
 	for _, tt := range tests {
 		tt := tt

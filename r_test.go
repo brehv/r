@@ -14,6 +14,11 @@ type StructWithMap struct {
 	RegularMap map[string]string
 	StructMap  map[string]interface{}
 }
+
+type StructWithSlice struct {
+	Slice []string
+}
+
 type A struct {
 	Person Person
 }
