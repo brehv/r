@@ -41,7 +41,7 @@ func TestF(t *testing.T) {
 			want: "",
 		},
 		{
-			name: "Passing in pointer to empty struct will return original value",
+			name: "Passing in pointer to empty struct will return empty value",
 			args: args{
 				subj:  pPerson,
 				fName: "Name",
@@ -79,6 +79,38 @@ func TestF(t *testing.T) {
 				fName: "A.Person.StructWithMap.RegularMap",
 			},
 			want: map[string]string{"hello": "hello"},
+		},
+		{
+			name: "Maps Part Four",
+			args: args{
+				subj:  B{A: A{Person: Person{Name: "Cherry", StructWithMap: StructWithMap{RegularMap: map[string]string{"hello": "hello"}}}}},
+				fName: "A.Person.StructWithMap.RegularMap.hello",
+			},
+			want: "hello",
+		},
+		{
+			name: "Maps Part Five",
+			args: args{
+				subj:  StructWithMap{StructMap: map[string]interface{}{"oneHundred": Nested{100}}},
+				fName: "StructMap.oneHundred",
+			},
+			want: Nested{100},
+		},
+		{
+			name: "Maps Part Six - Unexported Field return nil",
+			args: args{
+				subj:  StructWithMap{StructMap: map[string]interface{}{"oneHundred": Nested{100}}},
+				fName: "StructMap.oneHundred.i",
+			},
+			want: nil,
+		},
+		{
+			name: "Maps Part Seven - Exported Field",
+			args: args{
+				subj:  StructWithMap{StructMap: map[string]interface{}{"oneHundred": NestedExported{100}}},
+				fName: "StructMap.oneHundred.I",
+			},
+			want: 100,
 		},
 		{
 			name: "Slice",

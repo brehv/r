@@ -24,6 +24,10 @@ type Nested struct {
 	i int
 }
 
+type NestedExported struct {
+	I int
+}
+
 var pPerson *Person
 
 func TestR(t *testing.T) {
