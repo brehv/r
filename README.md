@@ -25,7 +25,10 @@ import (
 	"fmt"
 	"github.com/brehv/r"
 )
+
 var R = r.R
+var F = r.F
+
 type Person struct {
 	Name    string
 	Parents Parents
@@ -45,8 +48,11 @@ func main() {
 	fmt.Println(p) //{Milhouse {Cherry Dennis}}
 	updated := R(p, "Parents.Dad", "Larry")
 	fmt.Println(updated) //{Milhouse {Cherry Larry}}
+
+	value := F(p, "Parents.Mom")
+	fmt.Println(value) // Cherry
 }
 
 ```
 
-Again, feel free to look in `r_test.go` to see more examples
+Again, feel free to look in `r_test.go` or `f_test.go` to see more examples
