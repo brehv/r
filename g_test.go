@@ -69,7 +69,7 @@ func TestG(t *testing.T) {
 				fName: "Name",
 				val:   "Irrelevant",
 			},
-			want: pPerson,
+			want: nil,
 		},
 		{
 			name: "Two Levels Deep",
@@ -109,7 +109,7 @@ func TestG(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			if got := G(tt.args.subj, tt.args.fName); !reflect.DeepEqual(got, tt.want) {
+			if got := F(tt.args.subj, tt.args.fName); !reflect.DeepEqual(got, tt.want) {
 				fmt.Printf("%#v", got)
 				t.Errorf("R() = %v, want %v", got, tt.want)
 			}

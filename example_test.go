@@ -37,7 +37,7 @@ func Example_g() {
 		},
 	}
 	fmt.Println(p)
-	specificField := G(p, "Parents.Dad")
+	specificField := F(p, "Parents.Dad")
 	fmt.Println(specificField)
 
 	// Output:
