@@ -20,33 +20,8 @@ Run tests by running:
 
 ## Usage
 ```go
-package main
-import (
-	"fmt"
-	"github.com/brehv/r"
-)
-var R = r.R
-type Person struct {
-	Name    string
-	Parents Parents
-}
-type Parents struct {
-	Mom string
-	Dad string
-}
-func main() {
-	p := Person{
-		Name: "Milhouse",
-		Parents: Parents{
-			Mom: "Cherry",
-			Dad: "Dennis",
-		},
-	}
-	fmt.Println(p) //{Milhouse {Cherry Dennis}}
-	updated := R(p, "Parents.Dad", "Larry")
-	fmt.Println(updated) //{Milhouse {Cherry Larry}}
-}
-
+r.R(subj, "Field.Name.Whatever", "NewValue") // Replaces "Field.Name.Whatever" with "NewValue" and returns a copy of subj 
+r.G(subj, "Field.Name.Whatever") // Returns "Field.Name.Whatever" of subj
 ```
 
-Again, feel free to look in `r_test.go` to see more examples
+See [example_test.go](./example_test.go) or [r_test.go](./r_test.go) to see more examples

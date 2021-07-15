@@ -24,6 +24,13 @@ type Nested struct {
 	i int
 }
 
+type Aptr struct {
+	Person *Person
+}
+type Bptr struct {
+	A *Aptr
+}
+
 var pPerson *Person
 
 func TestR(t *testing.T) {
