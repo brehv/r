@@ -5,6 +5,11 @@ import (
 	"testing"
 )
 
+type UnexportedMemberStruct struct {
+	notexported int
+	Name        string
+}
+
 type Person struct {
 	Name          string
 	StructWithMap StructWithMap

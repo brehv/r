@@ -47,7 +47,9 @@ func fStruct(subj interface{}, s []string) interface{} {
 			f := original.Field(j)
 			n := original.Type().Field(j).Name
 			if !current.FieldByName(n).CanSet() {
-				return nil
+				// ignore unexported members (lowercase) of struct
+				// that cannot be set
+				continue
 			}
 			current.FieldByName(n).Set(f)
 		}
