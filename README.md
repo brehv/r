@@ -4,7 +4,7 @@
 
 r is a tool that allows you to replace a single field in a struct n-levels deep with a new value.
 
-The idea is to use r in testing scenarios where a function updates a single field, and you don't want to pollute your code with giant struct declarations; like in config tests.
+The idea is to use r in testing scenarios where a function updates a single field, and you don't want to pollute your code with giant struct declarations. Config tests for example.
 
 ## Installation
 
