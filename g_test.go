@@ -105,6 +105,16 @@ func TestG(t *testing.T) {
 			},
 			want: map[string]string{"hello": "hello"},
 		},
+		{
+			name: "Struct with unexported members",
+			args: args{
+				subj: map[string]interface{}{
+					"data": UnexportedMemberStruct{Name: "SomeName", notexported: 1},
+				},
+				fName: "data.Name",
+			},
+			want: "SomeName",
+		},
 	}
 	for _, tt := range tests {
 		tt := tt
