@@ -7,7 +7,7 @@ import (
 
 type UnexportedMemberStruct struct {
 	notexported int
-	Name string
+	Name        string
 }
 
 type Person struct {

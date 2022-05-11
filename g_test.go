@@ -115,6 +115,16 @@ func TestG(t *testing.T) {
 			},
 			want: "SomeName",
 		},
+		{
+			name: "Struct with unexported members",
+			args: args{
+				subj: map[string]interface{}{
+					"data": UnexportedMemberStruct{Name: "SomeName", notexported: 1},
+				},
+				fName: "data.Name",
+			},
+			want: "SomeName",
+		},
 	}
 	for _, tt := range tests {
 		tt := tt
@@ -125,4 +135,17 @@ func TestG(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestUnexportedMemberAccess(t *testing.T) {
+	defer func() { _ = recover() }()
+
+	subj := map[string]interface{}{
+		"data": UnexportedMemberStruct{Name: "SomeName", notexported: 1},
+	}
+	fName := "data.notexported"
+
+	F(subj, fName)
+
+	t.Errorf("Access to unexported members of structs should panic. (Expected: panic, Actual: no panic)")
 }
